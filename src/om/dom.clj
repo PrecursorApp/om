@@ -112,9 +112,11 @@
     ;; svg
     circle
     ellipse
+    foreignObject
     g
     line
     path
+    pattern
     polyline
     rect
     svg
