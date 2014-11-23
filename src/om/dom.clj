@@ -21,6 +21,7 @@
     canvas
     caption
     cite
+    clipPath
     code
     col
     colgroup
@@ -62,6 +63,7 @@
     main
     map
     mark
+    mask
     menu
     menuitem
     meta
