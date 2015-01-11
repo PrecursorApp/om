@@ -1,3 +1,81 @@
+## 0.8.0
+
+### Changes
+* OM-307: get-props extended to have a two arity form (korks)
+* OM-306: dissoc :raf
+
+## 0.8.0-rc1
+
+### Changes
+* relax transact! precondition, only require ITransact instance
+
+### Fixes
+* OM-301: Deprecation warning for om.dom/input
+* OM-300: do not preserve component local state entry after unmount
+
+## 0.8.0-beta5
+
+### Changes
+* Depend on 0.12.2.1 React JAR with new externs
+
+## 0.8.0-beta4
+
+### Changes
+* Add low-level namespace om.impl
+* update to React 0.12.2
+
+### Fixes
+* OM-190: add :key-fn option to `om.core/build`
+* OM-253: overrideable rAF
+* OM-294: IKVReduce for MapCursor & IndexedCursor
+* OM-296: `no-local-merge-pending-state` was not setting `:previous-state`
+
+## 0.8.0-beta3
+
+### Fixes
+* OM-290: component? precondition unexpectedly failing
+
+## 0.8.0-beta2
+
+### Enhancements
+* Preconditions on most of the public api to support earlier failures
+* Make `render-all` public
+
+## 0.8.0-beta1
+
+### Enhancements
+* Improved multimethod support, mount/unmount life-cycle methods invoked
+as expected
+
+## 0.8.0-alpha2
+
+### Enhancements
+* OM-260: remove cursor consistency checks
+
+### Fixes
+* OM-276: bad pending state for no local state
+* OM-262: input behavior regression
+* OM-270: incorrect no-local state behavior
+* OM-274: incorrect -lookup behavior for IndexedCursor
+* OM-267: bad logic for not found case in MapCusor -lookup implementation
+* OM-271: typo, parent not passed to ref sub-cursor
+
+## 0.8.0-alpha1
+
+### Enhancements
+* reference cursors
+* om.core/commit!, like om.core/transact! but will not trigger a re-render
+* add marquee tag
+* add om.core/mounted?
+* experimental support to write component local state into global state
+
+### Changes
+* React 0.11.2
+
+### Fixes
+* om.core/root now properly returns mounted component
+* default shouldComponentUpdate now compares state
+
 ## 0.7.3
 
 ### Changes

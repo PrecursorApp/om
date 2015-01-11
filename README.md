@@ -17,6 +17,8 @@ for [yourself](http://swannodette.github.io/2013/12/31/time-travel/).
 
 Om supports features not currently present in React:
 
+* Global state management facilities built in
+* Components may have arbitrary data dependencies, not limited to props & state
 * Component construction can be intercepted via
   `:instrument`. Simplifies debugging components and generic editors.
 * Provides stream of all application state change deltas via
@@ -26,17 +28,19 @@ Om supports features not currently present in React:
   Om components outside the Om framework, debugging, and adding event
   hooks not anticipated by original component designer.
 
-## Tutorial
+## Tutorials
 
 There is an in-depth tutorial that will introduce you to the core
 concepts of Om
 [here](http://github.com/swannodette/om/wiki/Basic-Tutorial) and a
 real-world integration example
-[here](http://github.com/swannodette/om/wiki/Intermediate-Tutorial).
+[here](http://github.com/swannodette/om/wiki/Intermediate-Tutorial). The
+community maintained [om-cookbook](https://github.com/om-cookbook)
+covers many common idioms and patterns.
 
 ## Examples
 
-```clj
+```clojure
 (ns example
   (:require [om.core :as om :include-macros true]
             [om.dom :as dom :include-macros true]))
@@ -87,6 +91,7 @@ examples:
   draggable
 * [om-autocomplete](https://github.com/arosequist/om-autocomplete),
   customizable autocompleter
+* [ff-om-draggable](https://github.com/neo/ff-om-draggable)
 * [om-widgets](https://bitbucket.org/athieme/om-widgets)
 * [om-dev-component](https://github.com/ioRekz/om-dev-component), add dev features (e.g. state history navigation) to your component
 * [om-sync](http://github.com/swannodette/om-sync), keep client and
@@ -94,8 +99,13 @@ examples:
 
 ## Applications built with Om
 
-* [CircleCI](http://www.circleci.com/)
+* [HackerSchool Community](https://github.com/hackerschool/community)
+* [Framed](http://www.framed.io/)
+* [Netrunner](https://github.com/mtgred/netrunner)
+* [CircleCI](http://www.circleci.com/), source [here](https://github.com/circleci/frontend)
 * [Prismatic](http://www.getprismatic.com/)
+* [Precursor](https://prcrsr.com)
+* [Assistant](https://github.com/29decibel/assistant)
 * [Fitsme](http://fitsmeapp.com)
 * [Goya](http://jackschaedler.github.io/goya/), pixel editor with
   undo/redo and visual history
@@ -111,18 +121,18 @@ examples:
 
 ## Using it
 
-Om is alpha software.
+The current version depends on React 0.12.2.
 
 Make sure you have [Leiningen](http://leiningen.org/) installed.
 
 Your `project.clj` should include something like the following:
 
-```clj
+```clojure
 (defproject foo "0.1.0"
   ...
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-2322"]
-                 [om "0.7.3"]]
+                 [org.clojure/clojurescript "0.0-2511"]
+                 [org.om/om "0.8.0"]]
   ...)
 ```
 
@@ -130,7 +140,7 @@ For local development your
 [lein-cljsbuild](http://github.com/emezeske/lein-cljsbuild) settings
 should look something like this:
 
-```clj
+```clojure
 :cljsbuild {
   :builds [{:id "dev"
             :source-paths ["src"]
@@ -147,7 +157,7 @@ Your local development markup should look something like the following:
 <html>
     <body>
        <div id="my-app"></div>
-       <script src="http://fb.me/react-0.11.1.js"></script>
+       <script src="http://fb.me/react-0.12.2.js"></script>
        <script src="out/goog/base.js" type="text/javascript"></script>
        <script src="main.js" type="text/javascript"></script>
        <script type="text/javascript">goog.require("main.core");</script>
@@ -158,7 +168,7 @@ Your local development markup should look something like the following:
 For production your [lein-cljsbuild](http://github.com/emezeske/lein-cljsbuild) settings should look something
 like this:
 
-```clj
+```clojure
 :cljsbuild {
   :builds [{:id "release"
             :source-paths ["src"]
@@ -166,8 +176,7 @@ like this:
               :output-to "main.js"
               :optimizations :advanced
               :pretty-print false
-              :preamble ["react/react.min.js"]
-              :externs ["react/externs/react.js"]}}]}
+              :preamble ["react/react.min.js"]}}]}
 ```
 
 This will generate a single file `main.js`. Your production markup
@@ -211,6 +220,8 @@ ClojureScript routing libraries exist that handle this problem quite
 well:
 
 * [secretary](http://github.com/gf3/secretary)
+* [silk](http://github.com/DomKM/silk)
+* [bidi](http://github.com/juxt/bidi)
 
 ### How do I test Om programs?
 

@@ -64,6 +64,7 @@
     map
     mark
     mask
+    marquee
     menu
     menuitem
     meta
