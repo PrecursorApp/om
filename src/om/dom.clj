@@ -1,5 +1,5 @@
 (ns om.dom
-  (:refer-clojure :exclude [map meta time]))
+  (:refer-clojure :exclude [map mask meta time]))
 
 (def tags
   '[a
@@ -21,6 +21,7 @@
     canvas
     caption
     cite
+    clipPath
     code
     col
     colgroup
@@ -62,6 +63,7 @@
     main
     map
     mark
+    mask
     marquee
     menu
     menuitem
@@ -113,9 +115,11 @@
     ;; svg
     circle
     ellipse
+    foreignObject
     g
     line
     path
+    pattern
     polyline
     rect
     svg

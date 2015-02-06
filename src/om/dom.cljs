@@ -1,5 +1,5 @@
 (ns om.dom
-  (:refer-clojure :exclude [map meta time])
+  (:refer-clojure :exclude [map mask meta time])
   (:require-macros [om.dom :as dom])
   (:require [cljsjs.react]
             [goog.object :as gobject]))
