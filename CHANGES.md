@@ -1,3 +1,44 @@
+## 0.8.8
+
+### Changes
+* Leverage 0.0-2755 macro usage enhancements
+
+## 0.8.7
+
+### Changes
+* Rely on newer cljsjs.react artifact
+
+## 0.8.6
+
+### Changes
+* Rely on cljsjs.react artifact
+
+## 0.8.5
+
+### Fixes
+* Fix subtle rendering bug in code set-state! queue logic
+
+## 0.8.4
+
+### Changes
+* Bump dependencies
+
+## 0.8.3
+
+### Changes
+* Bump dependencies
+
+## 0.8.2
+
+### Changes
+* Bump dependencies
+
+## 0.8.1
+
+### Changes
+* Proper fix to OM-300
+* Bump React JAR dep to 0.12.2.2
+
 ## 0.8.0
 
 ### Changes

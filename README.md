@@ -35,15 +35,15 @@ concepts of Om
 [here](http://github.com/swannodette/om/wiki/Basic-Tutorial) and a
 real-world integration example
 [here](http://github.com/swannodette/om/wiki/Intermediate-Tutorial). The
-community maintained [om-cookbook](https://github.com/om-cookbook)
+community maintained [om-cookbook](https://github.com/omcljs/om-cookbook)
 covers many common idioms and patterns.
 
 ## Examples
 
 ```clojure
 (ns example
-  (:require [om.core :as om :include-macros true]
-            [om.dom :as dom :include-macros true]))
+  (:require [om.core :as om]
+            [om.dom :as dom]))
 
 (defn widget [data owner]
   (reify
@@ -131,10 +131,27 @@ Your `project.clj` should include something like the following:
 (defproject foo "0.1.0"
   ...
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-2511"]
-                 [org.om/om "0.8.0"]]
+                 [org.clojure/clojurescript "0.0-2760"]
+                 [org.omcljs/om "0.8.8"]]
   ...)
 ```
+
+### React with Add-Ons
+
+If you would rather use React with Add-Ons you can configure this
+with Maven's exclusions feature:
+
+```clojure
+(defproject foo "0.1.0"
+  ...
+  :dependencies [[org.clojure/clojure "1.6.0"]
+                 [org.clojure/clojurescript "0.0-2760"]
+                 [org.omcljs/om "0.8.8" :exclusions [cljsjs/react]]
+                 [cljsjs/react-with-addons "0.12.2-4"]]
+  ...)
+```
+
+### Build configuration
 
 For local development your
 [lein-cljsbuild](http://github.com/emezeske/lein-cljsbuild) settings
@@ -145,22 +162,20 @@ should look something like this:
   :builds [{:id "dev"
             :source-paths ["src"]
             :compiler {
+              :main main.core
               :output-to "main.js"
               :output-dir "out"
               :optimizations :none
               :source-map true}}]}
 ```
 
-Your local development markup should look something like the following:
+Your markup should look something like the following:
 
 ```html
 <html>
     <body>
        <div id="my-app"></div>
-       <script src="http://fb.me/react-0.12.2.js"></script>
-       <script src="out/goog/base.js" type="text/javascript"></script>
        <script src="main.js" type="text/javascript"></script>
-       <script type="text/javascript">goog.require("main.core");</script>
     </body>
 </html>
 ```
@@ -173,34 +188,17 @@ like this:
   :builds [{:id "release"
             :source-paths ["src"]
             :compiler {
+              :main main.core
               :output-to "main.js"
               :optimizations :advanced
-              :pretty-print false
-              :preamble ["react/react.min.js"]}}]}
-```
-
-This will generate a single file `main.js`. Your production markup
-should look something like this:
-
-```html
-<html>
-    <body>
-       <div id="my-app"></div>
-       <script src="main.js" type="text/javascript"></script>
-    </body>
-</html>
+              :pretty-print false}}]}
 ```
 
 ## Contributing
 
-No pull requests at this time please.
-
-Om is still in the design phase so enhancements are low
-priority. However, bug reports are welcome for the existing
-functionality.
-
-For a sense of where Om is going the existing issues give a rough
-idea.
+Please contact me via email to request an electronic Contributor
+Agreement. Once your electronic CA has been signed and returned to me
+I will accept pull requests.
 
 ## FAQ
 
@@ -238,6 +236,6 @@ well:
 
 ## Copyright and license
 
-Copyright © 2013-2014 David Nolen
+Copyright © 2013-2015 David Nolen
 
 Licensed under the EPL (see the file epl.html).

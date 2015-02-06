@@ -1,5 +1,7 @@
 (ns om.core
-  (:require [om.dom :as dom :include-macros true]
+  (:require-macros om.core)
+  (:require [cljsjs.react]
+            [om.dom :as dom :include-macros true]
             [goog.dom :as gdom])
   (:import [goog.ui IdGenerator]))
 
@@ -490,7 +492,7 @@
         (let [c (children this)]
           (when (satisfies? IWillUnmount c)
             (will-unmount c))
-          (swap! (get-gstate this) dissoc :state-map (react-id this))
+          (swap! (get-gstate this) update-in [:state-map] dissoc (react-id this))
           (when-let [refs (seq (aget (.-state this) "__om_refs"))]
             (doseq [ref refs]
               (unobserve this ref))))))
@@ -1136,6 +1138,7 @@
                           (reset! ret c))))
                     ;; update state pass
                     (let [queue (-get-queue state)]
+                      (-empty-queue! state)
                       (when-not (empty? queue)
                         (doseq [c queue]
                           (when (.isMounted c)
@@ -1144,8 +1147,7 @@
                               (aset (.-state c) "__om_next_cursor" nil))
                             (when (or (not (satisfies? ICheckState (children c)))
                                       (.shouldComponentUpdate c (.-props c) (.-state c)))
-                              (.forceUpdate c))))
-                        (-empty-queue! state)))
+                              (.forceUpdate c))))))
                     ;; ref cursor pass
                     (let [_refs @_refs]
                       (when-not (empty? _refs)
@@ -1182,6 +1184,7 @@
           (-remove-properties! state watch-key)
           (remove-watch state watch-key)
           (tear-down state watch-key)
+          (swap! refresh-set disj rootf)
           (swap! roots dissoc target)
           (js/React.unmountComponentAtNode target)))
       (rootf))))

@@ -1,4 +1,4 @@
-(defproject org.om/om "0.8.0"
+(defproject org.omcljs/om "0.8.8"
   :description "ClojureScript interface to Facebook's React"
   :url "http://github.com/swannodette/om"
   :license {:name "Eclipse"
@@ -9,11 +9,11 @@
   :source-paths  ["src"]
 
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-2511" :scope "provided"]
+                 [org.clojure/clojurescript "0.0-2727" :scope "provided"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha" :scope "provided"]
-                 [com.facebook/react "0.12.2.1"]]
+                 [cljsjs/react "0.12.2-5"]]
 
-  :plugins [[lein-cljsbuild "1.0.4-SNAPSHOT"]]
+  :plugins [[lein-cljsbuild "1.0.4"]]
 
   :cljsbuild {
     :builds [{:id "test"
@@ -31,6 +31,15 @@
               :compiler {
                 :output-to "examples/hello/main.js"
                 :output-dir "examples/hello/out"
+                :source-map true
+                :optimizations :none}}
+             {:id "state-bug"
+              :source-paths ["src" "examples/state_bug/src"]
+              :compiler {
+                :main examples.state-bug.core
+                :asset-path "out"         
+                :output-to "examples/state_bug/main.js"
+                :output-dir "examples/state_bug/out"
                 :source-map true
                 :optimizations :none}}
              {:id "verify"
