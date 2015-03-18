@@ -63,6 +63,7 @@
     main
     map
     mark
+    marker
     mask
     marquee
     menu
